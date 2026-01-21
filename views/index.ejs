@@ -1,86 +1,67 @@
+<%- include('partials/head') %>
+<%- include('partials/header') %>
+<%- include('partials/navigation') %>
 
-
-<main id="home-content">
-  <!-- Hero Section with Featured Vehicle -->
+<main>
+  <h1>Welcome to CSE Motors!</h1>
+  
   <section class="hero-section">
-    <div class="hero-content">
-      <h1>Welcome to CSE Motors!</h1>
-      
-      <div class="featured-vehicle">
-        <div class="vehicle-info">
-          <h2 class="vehicle-name">DMC Delorean</h2>
-          <ul class="vehicle-features">
-            <li>3 Cup holders</li>
-            <li>Superman doors</li>
-            <li>Fuzzy dice!</li>
-          </ul>
-          <button class="cta-button">Own Today</button>
-        </div>
-        
-        <div class="vehicle-image">
-          <img src="/images/vehicles/delorean.jpg" alt="DMC Delorean - Back to the Future inspired classic car">
-        </div>
+    <div class="vehicle-card">
+      <div class="vehicle-info">
+        <h2>DMC Delorean</h2>
+        <ul class="features-list">
+          <li>3 Cup holders</li>
+          <li>Superman doors</li>
+          <li>Fuzzy dice!</li>
+        </ul>
+        <button class="own-today-btn" type="button">Own Today</button>
+      </div>
+      <div class="vehicle-image">
+        <img src="/images/vehicles/delorean.jpg" alt="DMC Delorean - silver sports car with gull-wing doors">
       </div>
     </div>
   </section>
 
-  <!-- Reviews Section -->
   <section class="reviews-section">
     <h2>DMC Delorean Reviews</h2>
     <ul class="reviews-list">
-      <li class="review-item">
-        <span class="review-text">"So fast it's almost like traveling in time."</span>
-        <span class="review-rating">(4/5)</span>
-      </li>
-      <li class="review-item">
-        <span class="review-text">"Coolest ride on the road."</span>
-        <span class="review-rating">(4/5)</span>
-      </li>
-      <li class="review-item">
-        <span class="review-text">"I'm feeling McFly!"</span>
-        <span class="review-rating">(5/5)</span>
-      </li>
-      <li class="review-item">
-        <span class="review-text">"The most futuristic ride of our day."</span>
-        <span class="review-rating">(4.5/5)</span>
-      </li>
-      <li class="review-item">
-        <span class="review-text">"80's livin and I love it!"</span>
-        <span class="review-rating">(5/5)</span>
-      </li>
+      <li>"So fast it's almost like traveling in time." (4/5)</li>
+      <li>"Coolest ride on the road." (4/5)</li>
+      <li>"I'm feeling McFly!" (5/5)</li>
+      <li>"The most futuristic ride of our day." (4.5/5)</li>
+      <li>"80's livin and I love it!" (5/5)</li>
     </ul>
   </section>
 
-  <!-- Upgrades Section -->
   <section class="upgrades-section">
     <h2>Delorean Upgrades</h2>
     <div class="upgrades-grid">
       <div class="upgrade-item">
-        <a href="#flux-capacitor" aria-label="Flux Capacitor upgrade">
-          <img src="/images/upgrades/flux-capacitor.jpg" alt="Flux Capacitor">
-          <p class="upgrade-name">Flux Capacitor</p>
+        <a href="/upgrades/flux-capacitor" aria-label="View Flux Capacitor upgrade details">
+          <img src="/images/upgrades/flux-capacitor.jpg" alt="Flux Capacitor upgrade">
+          <span>Flux Capacitor</span>
         </a>
       </div>
       <div class="upgrade-item">
-        <a href="#flame-decals" aria-label="Flame Decals upgrade">
-          <img src="/images/upgrades/flame.jpg" alt="Flame Decals">
-          <p class="upgrade-name">Flame Decals</p>
+        <a href="/upgrades/flame-decals" aria-label="View Flame Decals upgrade details">
+          <img src="/images/upgrades/flame.jpg" alt="Flame Decals upgrade">
+          <span>Flame Decals</span>
         </a>
       </div>
       <div class="upgrade-item">
-        <a href="#bumper-stickers" aria-label="Bumper Stickers upgrade">
-          <img src="/images/upgrades/bumper_sticker.jpg" alt="Bumper Stickers">
-          <p class="upgrade-name">Bumper Stickers</p>
+        <a href="/upgrades/bumper-stickers" aria-label="View Bumper Stickers upgrade details">
+          <img src="/images/upgrades/bumper_sticker.jpg" alt="Bumper Stickers upgrade">
+          <span>Bumper Stickers</span>
         </a>
       </div>
       <div class="upgrade-item">
-        <a href="#hub-caps" aria-label="Hub Caps upgrade">
-          <img src="/images/upgrades/hub-cap.jpg" alt="Hub Caps">
-          <p class="upgrade-name">Hub Caps</p>
+        <a href="/upgrades/hub-caps" aria-label="View Hub Caps upgrade details">
+          <img src="/images/upgrades/hub-cap.jpg" alt="Hub Caps upgrade">
+          <span>Hub Caps</span>
         </a>
       </div>
     </div>
   </section>
 </main>
 
-
+<%- include('partials/footer') %>
