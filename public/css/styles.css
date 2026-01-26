@@ -443,3 +443,355 @@ button:focus {
     border: 1px solid #000000;
   }
 }
+
+/* ==========================================
+   VEHICLE DETAIL VIEW STYLES
+   ========================================== */
+
+/* Detail container - mobile first (stacked layout) */
+.vehicle-detail {
+  background-color: #ffffff;
+  padding: 1.5rem;
+  margin: 2rem auto;
+  max-width: 1200px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+}
+
+/* Vehicle image */
+.vehicle-image {
+  width: 100%;
+  margin-bottom: 2rem;
+}
+
+.vehicle-image img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Vehicle information */
+.vehicle-info {
+  width: 100%;
+}
+
+/* Price section - prominently displayed */
+.vehicle-price {
+  background-color: #0066cc;
+  color: #ffffff;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.price-label {
+  font-size: 1.2rem;
+  font-weight: 600;
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.price-value {
+  font-size: 2.5rem;
+  font-weight: bold;
+  display: block;
+}
+
+/* Description section */
+.vehicle-description {
+  margin-bottom: 2rem;
+  padding-bottom: 2rem;
+  border-bottom: 2px solid #e0e0e0;
+}
+
+.vehicle-description h2 {
+  color: #000000;
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  font-weight: bold;
+}
+
+.vehicle-description p {
+  color: #333333;
+  line-height: 1.6;
+  font-size: 1.1rem;
+}
+
+/* Specifications section */
+.vehicle-specs {
+  margin-bottom: 2rem;
+}
+
+.vehicle-specs h2 {
+  color: #000000;
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  font-weight: bold;
+}
+
+.vehicle-specs dl {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.75rem 1.5rem;
+  background-color: #f5f5f5;
+  padding: 1.5rem;
+  border-radius: 8px;
+}
+
+.vehicle-specs dt {
+  font-weight: bold;
+  color: #000000;
+  text-align: right;
+}
+
+.vehicle-specs dd {
+  color: #333333;
+  margin: 0;
+}
+
+/* ==========================================
+   RESPONSIVE DESIGN - TABLET AND DESKTOP
+   ========================================== */
+
+@media screen and (min-width: 768px) {
+  /* Side-by-side layout for larger screens */
+  .vehicle-detail {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    padding: 2rem;
+  }
+  
+  .vehicle-image {
+    margin-bottom: 0;
+  }
+  
+  .vehicle-info {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  /* Adjust price for desktop */
+  .vehicle-price {
+    margin-bottom: 1.5rem;
+  }
+  
+  .price-value {
+    font-size: 3rem;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .vehicle-detail {
+    padding: 3rem;
+  }
+  
+  .vehicle-description h2,
+  .vehicle-specs h2 {
+    font-size: 1.75rem;
+  }
+  
+  .vehicle-description p {
+    font-size: 1.125rem;
+  }
+}
+
+/* ==========================================
+   ACCESSIBILITY
+   ========================================== */
+
+/* Focus styles for keyboard navigation */
+.vehicle-detail a:focus {
+  outline: 3px solid #0066cc;
+  outline-offset: 2px;
+}
+
+/* Print styles */
+@media print {
+  .vehicle-detail {
+    box-shadow: none;
+    border: 1px solid #000000;
+  }
+  
+  .vehicle-price {
+    background-color: #ffffff;
+    color: #000000;
+    border: 2px solid #000000;
+  }
+}
+
+/* ==========================================
+   ERROR PAGE STYLES
+   ========================================== */
+
+.error-container {
+  max-width: 800px;
+  margin: 4rem auto;
+  padding: 2rem;
+  text-align: center;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.error-container h1 {
+  font-size: 4rem;
+  color: #dc3545;
+  margin-bottom: 1rem;
+  font-weight: bold;
+}
+
+.error-container h2 {
+  font-size: 2rem;
+  color: #000000;
+  margin-bottom: 1.5rem;
+  font-weight: 600;
+}
+
+.error-message {
+  font-size: 1.2rem;
+  color: #333333;
+  margin-bottom: 2rem;
+  line-height: 1.6;
+}
+
+.error-actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.btn-primary,
+.btn-secondary {
+  padding: 0.875rem 2rem;
+  font-size: 1rem;
+  font-weight: 600;
+  text-decoration: none;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+  display: inline-block;
+}
+
+.btn-primary {
+  background-color: #0066cc;
+  color: #ffffff;
+  border: 2px solid #0066cc;
+}
+
+.btn-primary:hover,
+.btn-primary:focus {
+  background-color: #0052a3;
+  border-color: #0052a3;
+  outline: 3px solid #000000;
+  outline-offset: 2px;
+}
+
+.btn-secondary {
+  background-color: #ffffff;
+  color: #0066cc;
+  border: 2px solid #0066cc;
+}
+
+.btn-secondary:hover,
+.btn-secondary:focus {
+  background-color: #f0f0f0;
+  outline: 3px solid #000000;
+  outline-offset: 2px;
+}
+
+/* Responsive adjustments */
+@media screen and (max-width: 768px) {
+  .error-container {
+    margin: 2rem 1rem;
+    padding: 1.5rem;
+  }
+  
+  .error-container h1 {
+    font-size: 3rem;
+  }
+  
+  .error-container h2 {
+    font-size: 1.5rem;
+  }
+  
+  .error-actions {
+    flex-direction: column;
+  }
+  
+  .btn-primary,
+  .btn-secondary {
+    width: 100%;
+  }
+}
+
+/* Accessibility */
+.btn-primary:focus,
+.btn-secondary:focus {
+  outline: 3px solid #000000;
+  outline-offset: 2px;
+}
+
+/* ==========================================
+   NAVIGATION STYLES
+   ========================================== */
+
+.main-navigation {
+  background-color: #1a1a3e;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  padding: 0;
+  margin: 0;
+}
+
+.main-navigation ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.main-navigation li {
+  margin: 0;
+  padding: 0;
+}
+
+.main-navigation a {
+  display: block;
+  padding: 1rem 1.5rem;
+  color: #ffffff;  /* WHITE text - this is key! */
+  text-decoration: none;
+  font-weight: 600;
+  transition: background-color 0.3s;
+  border: none;
+}
+
+.main-navigation a:hover,
+.main-navigation a:focus {
+  background-color: #2e2e5e;
+  outline: 2px solid #ffffff;
+  outline-offset: -2px;
+}
+
+/* Mobile responsive */
+@media screen and (max-width: 768px) {
+  .main-navigation ul {
+    flex-direction: column;
+  }
+  
+  .main-navigation li {
+    width: 100%;
+    border-bottom: 1px solid #2e2e5e;
+  }
+  
+  .main-navigation a {
+    text-align: center;
+  }
+}
+
