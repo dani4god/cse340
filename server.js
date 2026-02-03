@@ -1,6 +1,9 @@
 /* ***********************
  * Require Statements
  *************************/
+const session = require("express-session")
+const flash = require("connect-flash");
+const pool = require('./database/')
 const static = require("./routes/static");
 const express = require("express");
 const expressLayouts = require("express-ejs-layouts");
@@ -11,24 +14,62 @@ const inventoryRoute = require("./routes/inventoryRoute");
 const errorRoute = require("./routes/errorRoute");
 const utilities = require("./utilities/");
 const errorMiddleware = require("./middleware/errorMiddleware");
-
-/* ***********************
- * Routes
- *************************/
-app.use(static);
+const accountRoute = require("./routes/accountRoute");
 
 /* ***********************
  * View Engine and Templates
  *************************/
-app.set("view engine", "ejs");
-app.use(expressLayouts);
-app.set("layout", "./layouts/layout");
-
 /* ***********************
  * Middleware
  * ************************/
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+
+app.use(session({
+  store: new (require('connect-pg-simple')(session))({
+    createTableIfMissing: true,
+    pool,
+  }),
+  secret: process.env.SESSION_SECRET || 'change-this-secret-key',
+  resave: true,
+  saveUninitialized: true,
+  name: 'sessionId',
+}))
+app.set("view engine", "ejs")
+app.use(expressLayouts)
+app.set("layout", "./layouts/layout") // not at views root
+
+
+// Express Messages Middleware
+app.use(require('connect-flash')())
+app.use(function(req, res, next){
+  res.locals.messages = require('express-messages')(req, res)
+  next()
+})
+
+
+
+
+
+
+
+
+/* ***********************
+ * Middleware
+ * ************************/
+
+app.set("view engine", "ejs");
+app.use(expressLayouts);
+app.set("layout", "./layouts/layout");
+
+/* ***********************
+ * Routes
+ *************************/
+app.use(static);
+// Account routes
+app.use("/account", accountRoute);
+
 
 // ⭐⭐⭐ ADD THIS - Makes nav available to all views ⭐⭐⭐
 app.use(async (req, res, next) => {

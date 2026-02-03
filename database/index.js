@@ -10,7 +10,7 @@ const pool = new Pool({
     : false,
 })
 
-// Optional: log successful connection
+
 pool.on("connect", () => {
   console.log("Connected to PostgreSQL")
 })

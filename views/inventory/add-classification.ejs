@@ -1,0 +1,77 @@
+<% if (title) { %>
+  <% } else {
+    title = "Add New Classification"
+  } %>
+
+<main>
+  <h1><%= title %></h1>
+  
+  <%- messages() %>
+  
+  <% if (errors) { %>
+    <ul class="notice">
+      <% errors.array().forEach(error => { %>
+        <li><%= error.msg %></li>
+      <% }) %>
+    </ul>
+  <% } %>
+  
+  <div class="form-container">
+    <p class="form-instructions">
+      <strong>Note:</strong> Classification name cannot contain spaces or special characters.
+    </p>
+    
+    <form id="addClassificationForm" action="/inv/add-classification" method="post">
+      <div class="form-group">
+        <label for="classification_name">Classification Name:</label>
+        <input 
+          type="text" 
+          id="classification_name" 
+          name="classification_name" 
+          required
+          placeholder="Enter classification name (e.g., SUV, Sedan)"
+          pattern="^[A-Za-z0-9]+$"
+          title="Classification name must not contain spaces or special characters"
+          value="<%= locals.classification_name ? classification_name : '' %>"
+        >
+        <span class="input-requirements">
+          Only letters and numbers are allowed. No spaces or special characters.
+        </span>
+      </div>
+      
+      <div class="form-group">
+        <button type="submit" class="btn-primary">Add Classification</button>
+      </div>
+    </form>
+    
+    <div class="back-link">
+      <a href="/inv">← Back to Management</a>
+    </div>
+  </div>
+</main>
+
+<script>
+  // Client-side validation
+  document.getElementById('addClassificationForm').addEventListener('submit', function(e) {
+    const classificationName = document.getElementById('classification_name').value;
+    const pattern = /^[A-Za-z0-9]+$/;
+    
+    if (!pattern.test(classificationName)) {
+      e.preventDefault();
+      alert('Classification name must not contain spaces or special characters. Only letters and numbers are allowed.');
+      return false;
+    }
+  });
+  
+  // Real-time validation feedback
+  document.getElementById('classification_name').addEventListener('input', function(e) {
+    const pattern = /^[A-Za-z0-9]+$/;
+    const value = e.target.value;
+    
+    if (value && !pattern.test(value)) {
+      e.target.setCustomValidity('Only letters and numbers allowed. No spaces or special characters.');
+    } else {
+      e.target.setCustomValidity('');
+    }
+  });
+</script>

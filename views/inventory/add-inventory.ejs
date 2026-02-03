@@ -1,0 +1,261 @@
+<% if (title) { %>
+  <% } else {
+    title = "Add New Vehicle"
+  } %>
+
+<main>
+  <h1><%= title %></h1>
+  
+  <%- messages() %>
+  
+  <% if (errors) { %>
+    <ul class="notice">
+      <% errors.array().forEach(error => { %>
+        <li><%= error.msg %></li>
+      <% }) %>
+    </ul>
+  <% } %>
+  
+  <div class="form-container inventory-form">
+    <form id="addInventoryForm" action="/inv/add-inventory" method="post">
+      
+      <div class="form-row">
+        <div class="form-group">
+          <label for="classification_id">Classification:</label>
+          <%- classificationList %>
+        </div>
+      </div>
+      
+      <div class="form-row">
+        <div class="form-group">
+          <label for="inv_make">Make:</label>
+          <input 
+            type="text" 
+            id="inv_make" 
+            name="inv_make" 
+            required
+            placeholder="e.g., Toyota"
+            minlength="3"
+            value="<%= locals.inv_make ? inv_make : '' %>"
+          >
+        </div>
+        
+        <div class="form-group">
+          <label for="inv_model">Model:</label>
+          <input 
+            type="text" 
+            id="inv_model" 
+            name="inv_model" 
+            required
+            placeholder="e.g., Camry"
+            minlength="3"
+            value="<%= locals.inv_model ? inv_model : '' %>"
+          >
+        </div>
+      </div>
+      
+      <div class="form-row">
+        <div class="form-group">
+          <label for="inv_year">Year:</label>
+          <input 
+            type="number" 
+            id="inv_year" 
+            name="inv_year" 
+            required
+            placeholder="e.g., 2024"
+            min="1900"
+            max="2050"
+            value="<%= locals.inv_year ? inv_year : '' %>"
+          >
+        </div>
+        
+        <div class="form-group">
+          <label for="inv_price">Price:</label>
+          <input 
+            type="number" 
+            id="inv_price" 
+            name="inv_price" 
+            required
+            placeholder="e.g., 25000"
+            min="0"
+            step="0.01"
+            value="<%= locals.inv_price ? inv_price : '' %>"
+          >
+        </div>
+      </div>
+      
+      <div class="form-row">
+        <div class="form-group">
+          <label for="inv_miles">Mileage:</label>
+          <input 
+            type="number" 
+            id="inv_miles" 
+            name="inv_miles" 
+            required
+            placeholder="e.g., 15000"
+            min="0"
+            value="<%= locals.inv_miles ? inv_miles : '' %>"
+          >
+        </div>
+        
+        <div class="form-group">
+          <label for="inv_color">Color:</label>
+          <input 
+            type="text" 
+            id="inv_color" 
+            name="inv_color" 
+            required
+            placeholder="e.g., Silver"
+            minlength="2"
+            value="<%= locals.inv_color ? inv_color : '' %>"
+          >
+        </div>
+      </div>
+      
+      <div class="form-group">
+        <label for="inv_description">Description:</label>
+        <textarea 
+          id="inv_description" 
+          name="inv_description" 
+          required
+          placeholder="Enter a detailed description of the vehicle..."
+          rows="5"
+          minlength="10"
+        ><%= locals.inv_description ? inv_description : '' %></textarea>
+      </div>
+      
+      <div class="form-row">
+        <div class="form-group">
+          <label for="inv_image">Image Path:</label>
+          <input 
+            type="text" 
+            id="inv_image" 
+            name="inv_image" 
+            required
+            placeholder="/images/vehicles/no-image.png"
+            pattern="^\/images\/vehicles\/.*\.(jpg|jpeg|png|gif|webp)$"
+            title="Must be a valid image path starting with /images/vehicles/"
+            value="<%= locals.inv_image ? inv_image : '/images/vehicles/no-image.png' %>"
+          >
+          <span class="input-requirements">
+            Path must start with /images/vehicles/ and end with .jpg, .jpeg, .png, .gif, or .webp
+          </span>
+        </div>
+      </div>
+      
+      <div class="form-row">
+        <div class="form-group">
+          <label for="inv_thumbnail">Thumbnail Path:</label>
+          <input 
+            type="text" 
+            id="inv_thumbnail" 
+            name="inv_thumbnail" 
+            required
+            placeholder="/images/vehicles/no-image-tn.png"
+            pattern="^\/images\/vehicles\/.*\.(jpg|jpeg|png|gif|webp)$"
+            title="Must be a valid image path starting with /images/vehicles/"
+            value="<%= locals.inv_thumbnail ? inv_thumbnail : '/images/vehicles/no-image-tn.png' %>"
+          >
+          <span class="input-requirements">
+            Path must start with /images/vehicles/ and end with .jpg, .jpeg, .png, .gif, or .webp
+          </span>
+        </div>
+      </div>
+      
+      <div class="form-group">
+        <button type="submit" class="btn-primary">Add Vehicle</button>
+      </div>
+    </form>
+    
+    <div class="back-link">
+      <a href="/inv">← Back to Management</a>
+    </div>
+  </div>
+</main>
+
+<script>
+  // Client-side validation
+  document.getElementById('addInventoryForm').addEventListener('submit', function(e) {
+    let isValid = true;
+    let errorMessage = '';
+    
+    // Validate classification
+    const classification = document.getElementById('classificationList').value;
+    if (!classification) {
+      isValid = false;
+      errorMessage += 'Please select a classification.\n';
+    }
+    
+    // Validate year
+    const year = parseInt(document.getElementById('inv_year').value);
+    const currentYear = new Date().getFullYear();
+    if (year < 1900 || year > currentYear + 1) {
+      isValid = false;
+      errorMessage += `Year must be between 1900 and ${currentYear + 1}.\n`;
+    }
+    
+    // Validate price
+    const price = parseFloat(document.getElementById('inv_price').value);
+    if (price < 0) {
+      isValid = false;
+      errorMessage += 'Price cannot be negative.\n';
+    }
+    
+    // Validate mileage
+    const miles = parseInt(document.getElementById('inv_miles').value);
+    if (miles < 0) {
+      isValid = false;
+      errorMessage += 'Mileage cannot be negative.\n';
+    }
+    
+    // Validate image paths
+    const imagePath = document.getElementById('inv_image').value;
+    const thumbnailPath = document.getElementById('inv_thumbnail').value;
+    const imagePattern = /^\/images\/vehicles\/.*\.(jpg|jpeg|png|gif|webp)$/i;
+    
+    if (!imagePattern.test(imagePath)) {
+      isValid = false;
+      errorMessage += 'Invalid image path format.\n';
+    }
+    
+    if (!imagePattern.test(thumbnailPath)) {
+      isValid = false;
+      errorMessage += 'Invalid thumbnail path format.\n';
+    }
+    
+    if (!isValid) {
+      e.preventDefault();
+      alert('Please correct the following errors:\n\n' + errorMessage);
+      return false;
+    }
+  });
+  
+  // Real-time validation for year
+  document.getElementById('inv_year').addEventListener('input', function(e) {
+    const year = parseInt(e.target.value);
+    const currentYear = new Date().getFullYear();
+    
+    if (year && (year < 1900 || year > currentYear + 1)) {
+      e.target.setCustomValidity(`Year must be between 1900 and ${currentYear + 1}`);
+    } else {
+      e.target.setCustomValidity('');
+    }
+  });
+  
+  // Real-time validation for price and mileage
+  document.getElementById('inv_price').addEventListener('input', function(e) {
+    if (parseFloat(e.target.value) < 0) {
+      e.target.setCustomValidity('Price cannot be negative');
+    } else {
+      e.target.setCustomValidity('');
+    }
+  });
+  
+  document.getElementById('inv_miles').addEventListener('input', function(e) {
+    if (parseInt(e.target.value) < 0) {
+      e.target.setCustomValidity('Mileage cannot be negative');
+    } else {
+      e.target.setCustomValidity('');
+    }
+  });
+</script>
