@@ -1,0 +1,138 @@
+<h1><%= title %></h1>
+
+<%- messages() %>
+
+<% if (errors) { %>
+  <ul class="notice">
+    <% errors.array().forEach(error => { %>
+      <li><%= error.msg %></li>
+    <% }) %>
+  </ul>
+<% } %>
+
+<div class="form-container update-account-container">
+  <!-- Account Update Form -->
+  <section class="update-section">
+    <h2>Update Account Information</h2>
+    <form id="updateForm" action="/account/update" method="post">
+      <div class="form-group">
+        <label for="account_firstname">First Name:</label>
+        <input 
+          type="text" 
+          id="account_firstname" 
+          name="account_firstname" 
+          required
+          minlength="1"
+          value="<%= locals.account_firstname ? account_firstname : '' %>"
+        >
+      </div>
+      
+      <div class="form-group">
+        <label for="account_lastname">Last Name:</label>
+        <input 
+          type="text" 
+          id="account_lastname" 
+          name="account_lastname" 
+          required
+          minlength="2"
+          value="<%= locals.account_lastname ? account_lastname : '' %>"
+        >
+      </div>
+      
+      <div class="form-group">
+        <label for="account_email">Email Address:</label>
+        <input 
+          type="email" 
+          id="account_email" 
+          name="account_email" 
+          required
+          value="<%= locals.account_email ? account_email : '' %>"
+        >
+      </div>
+      
+      <input type="hidden" name="account_id" value="<%= locals.account_id ? account_id : '' %>">
+      
+      <div class="form-group">
+        <button type="submit" class="btn-primary">Update Account</button>
+      </div>
+    </form>
+  </section>
+  
+  <!-- Password Change Form -->
+  <section class="update-section">
+    <h2>Change Password</h2>
+    <p class="password-info">
+      <strong>Password Requirements:</strong> Passwords must be at least 12 characters and include at least 1 uppercase letter, 1 lowercase letter, 1 number, and 1 special character.
+    </p>
+    <p class="password-info">
+      Entering a new password below will change your current password.
+    </p>
+    
+    <form id="passwordForm" action="/account/update-password" method="post">
+      <div class="form-group">
+        <label for="account_password">New Password:</label>
+        <input 
+          type="password" 
+          id="account_password" 
+          name="account_password" 
+          required
+          placeholder="Enter new password"
+          pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{12,}$"
+        >
+        <span class="password-requirements">
+          Must be at least 12 characters with uppercase, lowercase, number, and special character.
+        </span>
+      </div>
+      
+      <input type="hidden" name="account_id" value="<%= locals.account_id ? account_id : '' %>">
+      
+      <div class="form-group">
+        <button type="submit" class="btn-primary">Change Password</button>
+      </div>
+    </form>
+  </section>
+  
+  <div class="back-link">
+    <a href="/account/">← Back to Account Management</a>
+  </div>
+</div>
+
+<script>
+  // Client-side validation for update form
+  document.getElementById('updateForm').addEventListener('submit', function(e) {
+    const firstname = document.getElementById('account_firstname').value;
+    const lastname = document.getElementById('account_lastname').value;
+    const email = document.getElementById('account_email').value;
+    
+    if (firstname.length < 1) {
+      e.preventDefault();
+      alert('First name is required.');
+      return false;
+    }
+    
+    if (lastname.length < 2) {
+      e.preventDefault();
+      alert('Last name must be at least 2 characters.');
+      return false;
+    }
+    
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailPattern.test(email)) {
+      e.preventDefault();
+      alert('Please enter a valid email address.');
+      return false;
+    }
+  });
+  
+  // Client-side validation for password form
+  document.getElementById('passwordForm').addEventListener('submit', function(e) {
+    const password = document.getElementById('account_password').value;
+    const pattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{12,}$/;
+    
+    if (!pattern.test(password)) {
+      e.preventDefault();
+      alert('Password must be at least 12 characters and include uppercase, lowercase, number, and special character.');
+      return false;
+    }
+  });
+</script>
