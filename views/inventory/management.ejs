@@ -2,6 +2,11 @@
 
 <%- messages() %>
 
+<% if (accountData.account_type === "Employee" || accountData.account_type === "Admin") { %>
+  <p><a href="/review/manage">Manage Reviews</a></p>
+<% } %>
+
+
 <div class="management-container">
   <p class="management-intro">Welcome to the inventory management system. Use the options below to manage your vehicle inventory.</p>
   

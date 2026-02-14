@@ -1397,3 +1397,436 @@ button:focus {
   outline: 3px solid #0066cc;
   outline-offset: 2px;
 }
+
+
+/* ==========================================
+   REVIEWS SECTION STYLES
+   ========================================== */
+
+.reviews-section {
+  background-color: #ffffff;
+  padding: 2rem;
+  margin: 2rem 0;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.reviews-section h2 {
+  color: #000000;
+  font-size: 1.875rem;
+  margin-bottom: 1.5rem;
+  font-weight: bold;
+}
+
+/* Review Statistics */
+.review-stats {
+  background-color: #f9f9f9;
+  padding: 1.5rem;
+  border-radius: 8px;
+  margin-bottom: 1.5rem;
+}
+
+.average-rating {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.rating-number {
+  font-size: 3rem;
+  font-weight: bold;
+  color: #0066cc;
+}
+
+.stars {
+  font-size: 1.5rem;
+  color: #ffa500;
+}
+
+.total-reviews {
+  color: #666666;
+  font-size: 1rem;
+}
+
+/* Review Actions */
+.review-actions {
+  margin: 1.5rem 0;
+}
+
+.btn-secondary {
+  display: inline-block;
+  background-color: #ffffff;
+  color: #0066cc;
+  padding: 0.875rem 2rem;
+  font-size: 1rem;
+  font-weight: bold;
+  border: 2px solid #0066cc;
+  border-radius: 4px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.btn-secondary:hover,
+.btn-secondary:focus {
+  background-color: #0066cc;
+  color: #ffffff;
+  outline: 3px solid #000000;
+  outline-offset: 2px;
+}
+
+/* Reviews List */
+.reviews-list {
+  margin-top: 2rem;
+}
+
+.review-item {
+  border-bottom: 1px solid #e0e0e0;
+  padding: 1.5rem 0;
+}
+
+.review-item:last-child {
+  border-bottom: none;
+}
+
+.review-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.75rem;
+}
+
+.review-header strong {
+  color: #000000;
+  font-size: 1.1rem;
+}
+
+.review-rating {
+  font-size: 1.2rem;
+  color: #ffa500;
+}
+
+.review-text {
+  color: #333333;
+  line-height: 1.6;
+  margin-bottom: 0.5rem;
+}
+
+.review-date {
+  color: #999999;
+  font-size: 0.9rem;
+}
+
+.no-reviews {
+  color: #666666;
+  font-style: italic;
+  text-align: center;
+  padding: 2rem;
+}
+
+/* ==========================================
+   REVIEW FORM STYLES
+   ========================================== */
+
+.review-form {
+  max-width: 700px;
+}
+
+.vehicle-summary {
+  background-color: #f9f9f9;
+  padding: 1.5rem;
+  border-radius: 8px;
+  margin-bottom: 2rem;
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.vehicle-summary h2 {
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+.vehicle-summary img {
+  width: 150px;
+  height: auto;
+  border-radius: 4px;
+}
+
+/* Star Rating Input */
+.rating-input {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: flex-end;
+  gap: 0.25rem;
+  margin: 0.5rem 0;
+}
+
+.rating-input input[type="radio"] {
+  display: none;
+}
+
+.star-label {
+  cursor: pointer;
+  font-size: 2rem;
+  color: #cccccc;
+  transition: color 0.2s;
+}
+
+.star-label .star {
+  display: inline-block;
+}
+
+.rating-input input[type="radio"]:checked ~ .star-label .star,
+.rating-input .star-label:hover .star,
+.rating-input .star-label:hover ~ .star-label .star {
+  color: #ffa500;
+}
+
+.rating-text {
+  display: block;
+  color: #666666;
+  font-size: 0.9rem;
+  margin-top: 0.5rem;
+}
+
+/* Character Counter */
+.char-count {
+  display: block;
+  text-align: right;
+  color: #666666;
+  font-size: 0.9rem;
+  margin-top: 0.5rem;
+}
+
+/* ==========================================
+   REVIEW MANAGEMENT STYLES
+   ========================================== */
+
+.management-reviews {
+  max-width: 1000px;
+  margin: 2rem auto;
+}
+
+.review-card {
+  background-color: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.review-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 1rem;
+}
+
+.review-card-info h3 {
+  margin: 0 0 0.5rem 0;
+  color: #0066cc;
+  font-size: 1.25rem;
+}
+
+.review-card-meta {
+  color: #666666;
+  font-size: 0.9rem;
+}
+
+.review-card-rating {
+  font-size: 1.5rem;
+  color: #ffa500;
+}
+
+.review-card-text {
+  color: #333333;
+  line-height: 1.6;
+  margin-bottom: 1rem;
+  padding: 1rem;
+  background-color: #f9f9f9;
+  border-radius: 4px;
+}
+
+.review-card-actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-end;
+}
+
+.btn-approve,
+.btn-reject {
+  padding: 0.5rem 1.5rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  border-radius: 4px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.btn-approve {
+  background-color: #28a745;
+  color: #ffffff;
+  border: 2px solid #28a745;
+}
+
+.btn-approve:hover {
+  background-color: #218838;
+  border-color: #218838;
+}
+
+.btn-reject {
+  background-color: #dc3545;
+  color: #ffffff;
+  border: 2px solid #dc3545;
+}
+
+.btn-reject:hover {
+  background-color: #c82333;
+  border-color: #c82333;
+}
+
+/* ==========================================
+   MY REVIEWS STYLES
+   ========================================== */
+
+.my-reviews-container {
+  max-width: 900px;
+  margin: 2rem auto;
+}
+
+.user-review-card {
+  background-color: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.user-review-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.user-review-vehicle {
+  font-size: 1.25rem;
+  font-weight: bold;
+  color: #0066cc;
+}
+
+.user-review-status {
+  padding: 0.25rem 0.75rem;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.status-approved {
+  background-color: #d4edda;
+  color: #155724;
+}
+
+.status-pending {
+  background-color: #fff3cd;
+  color: #856404;
+}
+
+.status-rejected {
+  background-color: #f8d7da;
+  color: #721c24;
+}
+
+.user-review-actions {
+  margin-top: 1rem;
+  display: flex;
+  gap: 1rem;
+}
+
+.btn-edit,
+.btn-delete {
+  padding: 0.5rem 1.25rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  border-radius: 4px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.btn-edit {
+  background-color: #0066cc;
+  color: #ffffff;
+  border: 2px solid #0066cc;
+}
+
+.btn-edit:hover {
+  background-color: #0052a3;
+}
+
+.btn-delete {
+  background-color: #ffffff;
+  color: #dc3545;
+  border: 2px solid #dc3545;
+}
+
+.btn-delete:hover {
+  background-color: #dc3545;
+  color: #ffffff;
+}
+
+/* ==========================================
+   RESPONSIVE DESIGN
+   ========================================== */
+
+@media screen and (max-width: 768px) {
+  .vehicle-summary {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .review-card-header {
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .review-card-actions,
+  .user-review-actions {
+    flex-direction: column;
+  }
+  
+  .btn-approve,
+  .btn-reject,
+  .btn-edit,
+  .btn-delete {
+    width: 100%;
+    text-align: center;
+  }
+  
+  .average-rating {
+    flex-direction: column;
+    text-align: center;
+  }
+}
+
+/* ==========================================
+   ACCESSIBILITY
+   ========================================== */
+
+.btn-secondary:focus,
+.btn-approve:focus,
+.btn-reject:focus,
+.btn-edit:focus,
+.btn-delete:focus {
+  outline: 3px solid #000000;
+  outline-offset: 2px;
+}
+
+.star-label:focus-within {
+  outline: 2px solid #0066cc;
+  outline-offset: 2px;
+  border-radius: 4px;
+}

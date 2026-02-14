@@ -1,0 +1,101 @@
+<h1><%= title %></h1>
+
+<%- messages() %>
+
+<div class="management-reviews">
+  <% if (pendingReviews.length > 0) { %>
+    <p class="pending-count">
+      <strong><%= pendingReviews.length %></strong> review<%= pendingReviews.length !== 1 ? 's' : '' %> pending approval
+    </p>
+    
+    <% pendingReviews.forEach(review => { %>
+      <div class="review-card">
+        <div class="review-card-header">
+          <div class="review-card-info">
+            <h3><%= review.inv_year %> <%= review.inv_make %> <%= review.inv_model %></h3>
+            <div class="review-card-meta">
+              <strong>Reviewer:</strong> <%= review.account_firstname %> <%= review.account_lastname %><br>
+              <strong>Submitted:</strong> <%= new Date(review.review_date).toLocaleString() %>
+            </div>
+          </div>
+          <div class="review-card-rating">
+            <% for(let i = 1; i <= 5; i++) { %>
+              <%= i <= review.review_rating ? '★' : '☆' %>
+            <% } %>
+          </div>
+        </div>
+        
+        <div class="review-card-text">
+          <%= review.review_text %>
+        </div>
+        
+        <div class="review-card-actions">
+          <a href="/review/approve/<%= review.review_id %>" class="btn-approve">
+            ✓ Approve
+          </a>
+          <a href="/review/reject/<%= review.review_id %>" class="btn-reject">
+            ✗ Reject
+          </a>
+        </div>
+      </div>
+    <% }) %>
+  <% } else { %>
+    <div class="no-pending-reviews">
+      <p>✓ No pending reviews at this time.</p>
+      <p>All reviews have been processed.</p>
+    </div>
+  <% } %>
+  
+  <div class="back-link">
+    <a href="/inv/">← Back to Inventory Management</a>
+  </div>
+</div>
+
+<style>
+.pending-count {
+  background-color: #fff3cd;
+  border: 1px solid #ffc107;
+  color: #856404;
+  padding: 1rem;
+  border-radius: 4px;
+  margin-bottom: 2rem;
+  font-size: 1.1rem;
+  text-align: center;
+}
+
+.no-pending-reviews {
+  background-color: #d4edda;
+  border: 1px solid #c3e6cb;
+  color: #155724;
+  padding: 3rem;
+  border-radius: 8px;
+  text-align: center;
+  margin: 2rem 0;
+}
+
+.no-pending-reviews p {
+  margin: 0.5rem 0;
+  font-size: 1.1rem;
+}
+
+.no-pending-reviews p:first-child {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+</style>
+
+<script>
+  // Confirmation before approving/rejecting
+  document.querySelectorAll('.btn-approve, .btn-reject').forEach(btn => {
+    btn.addEventListener('click', function(e) {
+      const action = this.classList.contains('btn-approve') ? 'approve' : 'reject';
+      const confirmMsg = `Are you sure you want to ${action} this review?`;
+      
+      if (!confirm(confirmMsg)) {
+        e.preventDefault();
+        return false;
+      }
+    });
+  });
+</script>

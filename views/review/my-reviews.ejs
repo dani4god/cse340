@@ -1,0 +1,46 @@
+<h1><%= title %></h1>
+
+<%- messages() %>
+
+<div class="my-reviews-container">
+  <% if (reviews && reviews.length > 0) { %>
+    <% reviews.forEach(review => { %>
+      <div class="user-review-card">
+        <div class="user-review-header">
+          <div>
+            <h3 class="user-review-vehicle">
+              <a href="/inv/detail/<%= review.inv_id %>">
+                <%= review.inv_year %> <%= review.inv_make %> <%= review.inv_model %>
+              </a>
+            </h3>
+            <div class="review-rating">
+              <% for(let i = 1; i <= 5; i++) { %>
+                <%= i <= review.review_rating ? '★' : '☆' %>
+              <% } %>
+            </div>
+          </div>
+          <span class="user-review-status status-<%= review.review_status %>">
+            <%= review.review_status.charAt(0).toUpperCase() + review.review_status.slice(1) %>
+          </span>
+        </div>
+        
+        <p class="review-text"><%= review.review_text %></p>
+        <span class="review-date">Submitted: <%= new Date(review.review_date).toLocaleDateString() %></span>
+        
+        <div class="user-review-actions">
+          <a href="/review/edit/<%= review.review_id %>" class="btn-edit">Edit Review</a>
+          <a href="/review/delete/<%= review.review_id %>" class="btn-delete">Delete Review</a>
+        </div>
+      </div>
+    <% }) %>
+  <% } else { %>
+    <div class="no-reviews-message">
+      <p>You haven't written any reviews yet.</p>
+      <p>Browse our <a href="/">inventory</a> and share your experience!</p>
+    </div>
+  <% } %>
+  
+  <div class="back-link">
+    <a href="/account/">← Back to Account Management</a>
+  </div>
+</div>

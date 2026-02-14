@@ -1,4 +1,5 @@
 const invModel = require("../models/inventory-model");
+const reviewModel = require("../models/review-model");
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
 const Util = {};
@@ -80,7 +81,7 @@ Util.buildClassificationGrid = async function (data) {
 };
 
 /* **************************************
- * Build the detail view HTML
+ * Build the detail view HTML with reviews
  * ************************************ */
 Util.buildDetailView = async function (vehicle) {
   let detail = '<div class="vehicle-detail">';
@@ -131,7 +132,68 @@ Util.buildDetailView = async function (vehicle) {
   detail += '</div>'; // Close vehicle-info
   detail += '</div>'; // Close vehicle-detail
   
+  // Add reviews section
+  detail += await Util.buildReviewsSection(vehicle.inv_id);
+  
   return detail;
+};
+
+/* **************************************
+ * Build reviews section for vehicle detail
+ * ************************************ */
+Util.buildReviewsSection = async function (inv_id) {
+  const reviews = await reviewModel.getReviewsByInventoryId(inv_id);
+  const stats = await reviewModel.getReviewStats(inv_id);
+  
+  let reviewsHTML = '<div class="reviews-section">';
+  reviewsHTML += '<h2>Customer Reviews</h2>';
+  
+  // Review statistics
+  if (stats && stats.total_reviews > 0) {
+    reviewsHTML += '<div class="review-stats">';
+    reviewsHTML += '<div class="average-rating">';
+    reviewsHTML += `<span class="rating-number">${parseFloat(stats.average_rating).toFixed(1)}</span>`;
+    reviewsHTML += '<div class="stars">';
+    const avgRating = Math.round(parseFloat(stats.average_rating));
+    for (let i = 1; i <= 5; i++) {
+      reviewsHTML += i <= avgRating ? '★' : '☆';
+    }
+    reviewsHTML += '</div>';
+    reviewsHTML += `<span class="total-reviews">${stats.total_reviews} reviews</span>`;
+    reviewsHTML += '</div>';
+    reviewsHTML += '</div>';
+  }
+  
+  // Add review button
+  reviewsHTML += '<div class="review-actions">';
+  reviewsHTML += `<a href="/review/add/${inv_id}" class="btn-secondary">Write a Review</a>`;
+  reviewsHTML += '</div>';
+  
+  // Individual reviews
+  if (reviews.length > 0) {
+    reviewsHTML += '<div class="reviews-list">';
+    reviews.forEach(review => {
+      reviewsHTML += '<div class="review-item">';
+      reviewsHTML += '<div class="review-header">';
+      reviewsHTML += `<strong>${review.account_firstname} ${review.account_lastname.charAt(0)}.</strong>`;
+      reviewsHTML += '<div class="review-rating">';
+      for (let i = 1; i <= 5; i++) {
+        reviewsHTML += i <= review.review_rating ? '★' : '☆';
+      }
+      reviewsHTML += '</div>';
+      reviewsHTML += '</div>';
+      reviewsHTML += `<p class="review-text">${review.review_text}</p>`;
+      reviewsHTML += `<span class="review-date">${new Date(review.review_date).toLocaleDateString()}</span>`;
+      reviewsHTML += '</div>';
+    });
+    reviewsHTML += '</div>';
+  } else {
+    reviewsHTML += '<p class="no-reviews">Be the first to review this vehicle!</p>';
+  }
+  
+  reviewsHTML += '</div>';
+  
+  return reviewsHTML;
 };
 
 /* **************************************

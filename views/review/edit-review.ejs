@@ -1,0 +1,116 @@
+<h1><%= title %></h1>
+
+<%- messages() %>
+
+<% if (errors) { %>
+  <ul class="notice">
+    <% errors.array().forEach(error => { %>
+      <li><%= error.msg %></li>
+    <% }) %>
+  </ul>
+<% } %>
+
+<div class="form-container review-form">
+  <div class="vehicle-summary">
+    <h2><%= review.inv_year %> <%= review.inv_make %> <%= review.inv_model %></h2>
+  </div>
+  
+  <p class="info-message">
+    <strong>Note:</strong> Editing your review will reset its status to "pending" and require re-approval.
+  </p>
+  
+  <form id="editReviewForm" action="/review/edit" method="post">
+    <div class="form-group">
+      <label for="review_rating">Rating:</label>
+      <div class="rating-input">
+        <% for(let i = 5; i >= 1; i--) { %>
+          <input 
+            type="radio" 
+            id="rating_<%= i %>" 
+            name="review_rating" 
+            value="<%= i %>"
+            <%= (review.review_rating == i) ? 'checked' : '' %>
+            required
+          >
+          <label for="rating_<%= i %>" class="star-label">
+            <span class="star">★</span>
+          </label>
+        <% } %>
+      </div>
+      <span class="rating-text">Select 1-5 stars</span>
+    </div>
+    
+    <div class="form-group">
+      <label for="review_text">Your Review:</label>
+      <textarea 
+        id="review_text" 
+        name="review_text" 
+        required
+        minlength="10"
+        maxlength="1000"
+        rows="6"
+        placeholder="Share your experience with this vehicle... (10-1000 characters)"
+      ><%= review.review_text %></textarea>
+      <span class="char-count"><span id="charCount">0</span>/1000</span>
+    </div>
+    
+    <input type="hidden" name="review_id" value="<%= review.review_id %>">
+    <input type="hidden" name="inv_id" value="<%= review.inv_id %>">
+    
+    <div class="form-group">
+      <button type="submit" class="btn-primary">Update Review</button>
+    </div>
+  </form>
+  
+  <div class="back-link">
+    <a href="/review/my-reviews">← Back to My Reviews</a>
+  </div>
+</div>
+
+<style>
+.info-message {
+  background-color: #d1ecf1;
+  border: 1px solid #bee5eb;
+  color: #0c5460;
+  padding: 1rem;
+  border-radius: 4px;
+  margin-bottom: 1.5rem;
+}
+</style>
+
+<script>
+  // Character counter
+  const textarea = document.getElementById('review_text');
+  const charCount = document.getElementById('charCount');
+  
+  function updateCharCount() {
+    charCount.textContent = textarea.value.length;
+  }
+  
+  textarea.addEventListener('input', updateCharCount);
+  updateCharCount();
+  
+  // Client-side validation
+  document.getElementById('editReviewForm').addEventListener('submit', function(e) {
+    const text = textarea.value.trim();
+    const rating = document.querySelector('input[name="review_rating"]:checked');
+    
+    if (!rating) {
+      e.preventDefault();
+      alert('Please select a rating.');
+      return false;
+    }
+    
+    if (text.length < 10) {
+      e.preventDefault();
+      alert('Review must be at least 10 characters long.');
+      return false;
+    }
+    
+    if (text.length > 1000) {
+      e.preventDefault();
+      alert('Review must be no more than 1000 characters.');
+      return false;
+    }
+  });
+</script>

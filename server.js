@@ -4,6 +4,7 @@
 const session = require("express-session");
 const flash = require("connect-flash");
 const pool = require('./database/');
+const reviewRoute = require("./routes/reviewRoute");
 const static = require("./routes/static");
 const express = require("express");
 const expressLayouts = require("express-ejs-layouts");
@@ -76,12 +77,13 @@ app.get("/", utilities.handleErrors(baseController.buildHome));
 
 // Inventory routes - error handling applied in route file
 app.use("/inv", inventoryRoute);
-
+app.use("/review", reviewRoute);
 // 404 handler - must be after all other routes
 app.use(errorMiddleware.notFoundHandler);
 
 // Error handling middleware - must be last
 app.use(errorMiddleware.errorHandler);
+
 
 /* ***********************
  * Local Server Information

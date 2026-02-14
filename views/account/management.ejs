@@ -8,6 +8,7 @@
     
     <div class="account-actions">
       <p><a href="/account/update/<%= accountData.account_id %>">Update Account Information</a></p>
+      <p><a href="/review/my-reviews">My Reviews</a></p> <!-- MOVED HERE - for all users -->
     </div>
     
     <% if (accountData.account_type === "Employee" || accountData.account_type === "Admin") { %>
